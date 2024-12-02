@@ -12,8 +12,8 @@ app.get('/', (c) => {
 })
 
 app.route("/api/v1/blog", blogRouter);
-app.route("/api/v1user", userRouter);
+app.route("/api/v1/user", userRouter);
 
 
 
-export default app
+export default app;

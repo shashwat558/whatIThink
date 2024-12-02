@@ -2,10 +2,11 @@ name = "backend"
 main = "src/index.ts"
 compatibility_date = "2024-11-27"
 
-# compatibility_flags = [ "nodejs_compat" ]
+ compatibility_flags = [ "nodejs_compat" ]
 
-# [vars]
-# DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZDZhYTNiYjYtYTBhMC00Yzg3LTkzZDUtYTI2ZDE1Y2UzYzY5IiwidGVuYW50X2lkIjoiODZlNTk1ZTMzN2EwODEwOGM2YTJlNjgzY2JhNjFhNTExNzEwNWEwYmIwOWUwMmMwYjVhM2Y4NzNiYTc1NDliNCIsImludGVybmFsX3NlY3JldCI6IjVmNzJlMzBlLWVkNjgtNGI1ZC05YThlLTMzY2Y5YjIzZDU3NyJ9.9VOfP6iGuqgDq8ROAmRU4n7dc4U5MlZ4CUXitwe1QkY"
+ [vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiYzgxMjAyMTAtYzUwZi00ZWQ3LTgxZTQtN2Q3ZWEzYjBmNzBmIiwidGVuYW50X2lkIjoiODZlNTk1ZTMzN2EwODEwOGM2YTJlNjgzY2JhNjFhNTExNzEwNWEwYmIwOWUwMmMwYjVhM2Y4NzNiYTc1NDliNCIsImludGVybmFsX3NlY3JldCI6IjVmNzJlMzBlLWVkNjgtNGI1ZC05YThlLTMzY2Y5YjIzZDU3NyJ9.MAGYjK2AcnAtiNX6mKUbhKiPF8Kb5zce51Tud6sNw_M"
+JWT_SECRET = "thisismysecretpassword"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
