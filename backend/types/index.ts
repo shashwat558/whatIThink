@@ -15,3 +15,9 @@ export const blogSchema = z.object({
     title: z.string(),
     description : z.string()
 })
+
+export const updateBlogSchema = z.object({
+    id: z.number(),
+    title: z.string(),
+    description: z.string(),
+})

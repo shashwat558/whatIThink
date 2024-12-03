@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import authMiddleware from "../middleware";
-import { blogSchema } from "../../types";
+import { blogSchema, updateBlogSchema } from "../../types";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
@@ -102,4 +102,48 @@ blogRouter.get('/bulk', async (c) => {
     return c.json({
         blogs: blogs
     }, 200)
+})
+
+blogRouter.delete("/:id", async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate())
+    try {
+        const blogId = c.req.param("id");
+
+    const blog = await prisma.blog.delete({
+        where: {
+            id: Number(blogId)
+        }
+    })
+    return c.json({message: "Blog deleted succesfully"}, 200)
+    } catch (error) {
+        console.log(error)
+        return c.json({message: "Internal server error"}, 500
+
+        )
+    }
+    
+})
+
+blogRouter.put('/', async (c) => {
+    const body = await c.req.json()
+    const parsedData = updateBlogSchema.safeParse(body);
+    if(!parsedData.success){
+        return c.json({message: "Validation failed"}, 400)
+    }
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate());
+
+    const blogToUpdate = await prisma.blog.update({
+        where: {
+            id: parsedData.data.id
+        },
+        data:{
+            title: parsedData.data.title,
+            description: parsedData.data.description,
+        }
+    })
+    return c.json({message: "Updated blog succesfully ", updatedBlog: blogToUpdate}, 200)
 })
