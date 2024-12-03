@@ -11,9 +11,11 @@ export const blogRouter = new Hono<{
     }
 }>
 
+blogRouter.use('/api/v1/blog/*', async (c, next) => {
+    await next()
+  })
 
-
-blogRouter.post('/', authMiddleware, async (c) => {
+blogRouter.post('/', async (c) => {
 
     const prisma = new PrismaClient({
         datasourceUrl : c.env?.DATABASE_URL
@@ -25,6 +27,7 @@ blogRouter.post('/', authMiddleware, async (c) => {
     if(!parsedData.success){
         return c.json({message: "Validation failed"}, 400);
     }
+    
 
     try {
         const description = parsedData.data.description;

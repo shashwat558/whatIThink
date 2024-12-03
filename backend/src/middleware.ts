@@ -5,7 +5,8 @@ export default async function authMiddleware(c: any, next:Next){
     const adminEmail = c.env.ADMIN_EMAIL;
     const adminPassword = c.env.ADMIN_PASSWORD;
     
-    const authHeader = c.req.headers.get("authorization");
+    const authHeader = c.req.headers["authorization"];
+    console.log(authHeader)
     if(!authHeader || !authHeader.startsWith("Bearer ")){
         return c.json({message: "unauthorized"});
     }
