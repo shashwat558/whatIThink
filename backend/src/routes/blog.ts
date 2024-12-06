@@ -84,7 +84,7 @@ blogRouter.get("/:id", async (c) => {
     },200)
 }) 
 
-
+//TODO:fix the bulk endpoint
 blogRouter.get('/bulk', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
