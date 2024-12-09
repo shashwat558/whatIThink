@@ -3,25 +3,25 @@
 import Link from "next/link";
 import { AuthForm } from "@/components/auth/auth-form";
 
-export default function SignInPage() {
+export default function Signin() {
   return (
-    <div className="container flex h-screen w-screen min-w-full flex-col items-center justify-center">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+    <div className="container  flex h-screen w-screen min-w-full max-sm:p-4 flex-col items-center justify-center">
+      <div className=" flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            Create an account
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your email to sign in to your account
+            Enter your email below to create your account
           </p>
         </div>
-        <AuthForm type="signin" />
+        <AuthForm type="signup" />
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link 
-            href="/auth/signup"
-            className="hover:text-black underline underline-offset-4 "
+            href="/api/signin"
+            className="hover:text-white underline underline-offset-4"
           >
-            Don&apos;t have an account? Sign Up
+            Already have an account? Sign In
           </Link>
         </p>
       </div>
