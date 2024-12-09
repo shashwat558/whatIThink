@@ -18,7 +18,7 @@ export default function SignupPage() {
         <AuthForm type="signup" />
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link 
-            href="/api/signin"
+            href="/api/auth/signin"
             className="hover:text-white underline underline-offset-4"
           >
             Already have an account? Sign In

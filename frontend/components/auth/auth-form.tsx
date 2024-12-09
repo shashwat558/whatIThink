@@ -41,7 +41,7 @@ export  function AuthForm({ type, className }: AuthFormProps) {
   async function onSubmit(data: z.infer<typeof authSchema>) {
     setIsLoading(true);
     try {
-        const response = await axios.post("localhost:8787/api/v1/user/signup", {
+        const response = await axios.post(`localhost:8787/api/v1/user/${type === "signin" ? "signin":"signup"}`, {
             email: data.email,
             password: data.password
         })

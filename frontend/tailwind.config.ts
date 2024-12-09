@@ -55,8 +55,14 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  fontFamily: {
+			teko: ['Teko', 'sans-serif'],
+			outfit: ['Outfit', 'sans-serif'],
+			parkinsans: ['Parkinsans', 'sans-serif'],
+		  },
   	}
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
