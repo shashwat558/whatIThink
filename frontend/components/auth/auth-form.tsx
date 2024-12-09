@@ -11,6 +11,8 @@ import { Icons } from "@/components/icon";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 
+import { redirect } from "next/navigation";
+
 const authSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -26,6 +28,8 @@ type AuthFormProps = {
 export  function AuthForm({ type, className }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   
+  
+  
   const {
     register,
     handleSubmit,
@@ -37,17 +41,22 @@ export  function AuthForm({ type, className }: AuthFormProps) {
   async function onSubmit(data: z.infer<typeof authSchema>) {
     setIsLoading(true);
     try {
-        const response = await axios.post("localhost:3000/api/v1/signup", {
+        const response = await axios.post("localhost:8787/api/v1/user/signup", {
             email: data.email,
             password: data.password
         })
         const token = response.data.token;
         localStorage.setItem("token", token);
+        redirect("/blogs")
     } catch (error) {
         console.log(error)
     }
+    
+    
+     
     console.log(data);
     setTimeout(() => setIsLoading(false), 1000);
+     
   }
 
   return (
@@ -78,7 +87,7 @@ export  function AuthForm({ type, className }: AuthFormProps) {
             />
             
           </div>
-          <Button disabled={isLoading} className="bg-white text-black">
+          <Button type="submit" disabled={isLoading} className="bg-white text-black">
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
