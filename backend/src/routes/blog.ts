@@ -12,7 +12,12 @@ export const blogRouter = new Hono<{
 }>
 
 blogRouter.use('/api/v1/blog/*', async (c, next) => {
-    await next()
+    if(c.req.method == "GET"){
+        await next();
+        return;
+    }
+    await next();
+    
   })
 
 blogRouter.post('/', async (c) => {
@@ -58,6 +63,30 @@ blogRouter.post('/', async (c) => {
     
     
 })
+blogRouter.get('/bulk', async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate());
+
+    try {
+        const blogs = await prisma.blog.findMany({
+            select:{
+                id: true,
+                title: true,
+                description: true,
+                publishedDate: true,
+                readingTime: true
+            }
+        })
+        return c.json({
+            blogs: blogs
+        }, 200)
+    } catch (error) {
+        
+        console.log(error)
+        return c.json({Message: error}, 500)
+    }
+})
 
 blogRouter.get("/:id", async (c) => {
     const id = c.req.param("id");
@@ -85,24 +114,7 @@ blogRouter.get("/:id", async (c) => {
 }) 
 
 //TODO:fix the bulk endpoint
-blogRouter.get('/bulk', async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL
-    }).$extends(withAccelerate());
 
-    const blogs = await prisma.blog.findMany({
-        select:{
-            id: true,
-            title: true,
-            description: true,
-            publishedDate: true,
-            readingTime: true
-        }
-    })
-    return c.json({
-        blogs: blogs
-    }, 200)
-})
 
 blogRouter.delete("/:id", async (c) => {
     const prisma = new PrismaClient({

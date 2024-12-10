@@ -89,5 +89,5 @@ userRouter.post('/signin', async (c) =>{
     console.log("reached here")
 
     const token = await sign({email: user.email, password: user.password, role: user.role}, c.env.JWT_SECRET);
-    return c.json({token : token})
+    return c.json({token : token, user: user})
 })
