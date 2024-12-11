@@ -11,7 +11,7 @@ import { Icons } from "@/components/icon";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const authSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -27,6 +27,7 @@ type AuthFormProps = {
 
 export  function AuthForm({ type, className }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   
   
   
@@ -46,9 +47,12 @@ export  function AuthForm({ type, className }: AuthFormProps) {
             password: data.password
         })
         const token = response.data.token;
+        const user = response.data.user;
         console.log(token+ "This is token")
         localStorage.setItem("token", token);
-        redirect("/blogs")
+        localStorage.setItem("user", user)
+        console.log(user.role)
+        
     } catch (error) {
         console.log(error)
     }
@@ -57,6 +61,7 @@ export  function AuthForm({ type, className }: AuthFormProps) {
      
     console.log(data);
     setTimeout(() => setIsLoading(false), 1000);
+    router.push("/blogs")
      
   }
 

@@ -1,15 +1,19 @@
 import React from 'react'
 import { CalendarIcon, ClockIcon, UserIcon } from 'lucide-react'
+import Link from 'next/link'
 
 interface BlogCardProps {
+  id: string
   title: string
-  description?: string
+  description: string
   readingTime: string
   publishedDate: string
-  author: string
+  author?: string
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
+    id,
+
   title,
   description = '',
   author,
@@ -22,8 +26,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
       : description
 
   return (
-    <div className="relative overflow-hidden   border-gray-800 bg-black text-white shadow-md transition-all hover:shadow-lg w-[600px] border-l-[1px]">
-      <div className="relative z-10 p-6">
+    <div className="relative overflow-hidden   border-gray-600 bg-[#353941] text-white shadow-md transition-all hover:shadow-lg w-[600px] border-l-[1px] border-b-[1px]">
+        <Link href={`/blog/${id}`}>
+        <div className="relative z-10 p-6">
         <h2 className="mb-2 text-2xl font-bold tracking-tight">
           {title}
         </h2>
@@ -47,6 +52,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
           </div>
         </div>
       </div>
+      </Link>
+      
     </div>
   )
 }
