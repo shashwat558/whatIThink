@@ -1,6 +1,7 @@
 import React from 'react'
 import { CalendarIcon, ClockIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
+import { formateDate } from '@/lib/utils'
 
 interface BlogCardProps {
   id: string
@@ -48,7 +49,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           </div>
           <div className="flex items-center space-x-2">
             <CalendarIcon className="h-4 w-4" />
-            <span>{publishedDate}</span>
+            <span>{formateDate(publishedDate)}</span>
           </div>
         </div>
       </div>
