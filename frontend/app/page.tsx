@@ -1,5 +1,6 @@
 "use client"
 import BlogCard from "@/components/BlogCard";
+import { Input } from "@/components/ui/input";
 // import { blogState } from "@/state/state";
 import { Blog } from "@/types/types";
 import axios from "axios";
@@ -19,7 +20,12 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   // const setBlogs = useSetRecoilState(blogState);
+  
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+  
+
+  
 
   useEffect(() => {
     async function fetchBlogs(){
@@ -37,6 +43,10 @@ export default function Home() {
     fetchBlogs()
   },[setBlogs])
 
+  const filteredBlogs = blogs.filter(blog => {
+    return blog.title.toLowerCase().includes(searchText.toLowerCase());
+  })
+
 
   return (
     <div className="flex justify-center items-center w-screen h-screen ">
@@ -44,9 +54,12 @@ export default function Home() {
         <div className="">
           <h1 className="text-5xl tracking-tight border-b-[1.5px] border-b-gray-800 p-3">So, this is what i think</h1>
         </div>
+        <div>
+          <Input placeholder="Search..." type="text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
+        </div>
         <div className="mt-4">
         
-        {blogs.map((blog) => (
+        {filteredBlogs.map((blog) => (
       <BlogCard 
         id={blog.id}
         key={blog.id}
