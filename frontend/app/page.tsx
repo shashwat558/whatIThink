@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Blog } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Trash2 } from 'lucide-react';
+
 // import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // interface Blog{
@@ -25,6 +25,17 @@ export default function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   
+  const handleDelete = async(id: string) => {
+    try {
+      await axios.delete(`http://localhost:8787/api/v1/blog/${id}`);
+      setBlogs((prev) => prev.filter((blog) => {blog.id !== id}));
+  
+    
+    }catch(error){
+      console.log(error)
+    }
+  
+  }
 
   
 
@@ -68,6 +79,7 @@ export default function Home() {
         description={blog.description}
         publishedDate={blog.publishedDate}
         readingTime={blog.readingTime}
+        onDelete={handleDelete}
       
       />
     ))}

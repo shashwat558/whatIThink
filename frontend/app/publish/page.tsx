@@ -9,6 +9,8 @@ import { isAdmin } from '@/lib/utils'
 import { notFound, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Icons } from '@/components/icon'
+import Editor from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 
 
@@ -27,7 +29,7 @@ export default function BlogCreationPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl bg-gray-900 border-gray-800">
+      <Card className="w-import {Editor, EditorState} from 'draft-js';full max-w-2xl bg-gray-900 border-gray-800">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-white">Create a New Blog Post</CardTitle>
           <CardDescription className="text-gray-400">Share your thoughts with the world</CardDescription>
@@ -46,14 +48,15 @@ export default function BlogCreationPage() {
           </div>
           <div className="space-y-2">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
-            <Textarea
+            <Editor
               id="description"
               placeholder="Write your blog content here..."
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="min-h-[200px] bg-gray-800 border-gray-700 text-white placeholder-gray-500"
-              disabled={isLoading}
+              onChange={(value) => setDescription(value)} 
+              theme="snow"
+              className="min-h-[200px] bg-gray-700 border-gray-500 text-white placeholder-gray-500"
             />
+            
           </div>
         </CardContent>
         <CardFooter>
@@ -81,7 +84,7 @@ export default function BlogCreationPage() {
           }
           
           }  className="w-full bg-white text-black hover:bg-gray-200">
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            {isLoading?<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />: ""}
             Publish
           </Button>
         </CardFooter>
