@@ -25,12 +25,17 @@ export function formateDate(dateString: string):string {
 
 
 export const isAdmin = (): boolean => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) return false;
-
+  
     try {
         const decodedToken = jwtDecode<DecodedToken>(token);
-        return decodedToken.role === 'admin';
+        
+        if(decodedToken.role == "Admin"){
+          return true;
+        } else{
+          return false
+        }
     } catch (error) {
         console.error('Invalid token', error);
         return false;
