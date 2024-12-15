@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Blog } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Trash2 } from 'lucide-react';
 // import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // interface Blog{

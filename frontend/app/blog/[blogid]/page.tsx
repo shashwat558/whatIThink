@@ -26,7 +26,9 @@ const Page = async ({ params }: { params: { blogid: number } }) => {
 
   return (
     <article className="mt-10 max-w-2xl mx-auto px-4 py-12">
+     <div className='absolute top-10 left-4'>
      <GoBackButton />
+     </div>
     <header className="mb-8">
       <h1 className="text-3xl font-bold mb-2">{blog.title}</h1>
       <div className="text-sm text-gray-500 flex items-center space-x-4">
