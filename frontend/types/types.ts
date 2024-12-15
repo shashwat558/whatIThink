@@ -5,3 +5,10 @@ export interface Blog {
     publishedDate: string;
     readingTime: string;
 }
+
+export interface User {
+    id: string;
+    email: string;
+    password: string;
+    role: string;
+}

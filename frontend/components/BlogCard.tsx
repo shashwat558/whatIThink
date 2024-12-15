@@ -40,12 +40,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
         )}
         <div className="mb-4 flex items-center space-x-2 text-sm text-gray-400">
           <UserIcon className="h-4 w-4" />
-          <span>{author}</span>
+          <span>{author? author: "Shashwat"}</span>
         </div>
         <div className="flex items-center justify-between text-sm text-gray-400">
           <div className="flex items-center space-x-2">
             <ClockIcon className="h-4 w-4" />
-            <span>{readingTime}</span>
+            <span>{readingTime} min read</span>
           </div>
           <div className="flex items-center space-x-2">
             <CalendarIcon className="h-4 w-4" />
