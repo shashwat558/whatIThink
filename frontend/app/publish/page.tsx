@@ -1,44 +1,92 @@
-"use client";
+'use client'
 
-import { Textarea } from '@/components/ui/textarea'
+import { useEffect, useState } from 'react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { isAdmin } from '@/lib/utils'
-import { notFound } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-
-interface Blog{
-    title: string,
-    description: string
-}
-
-const handleSubmit = async () => {
-    
-}
-
-const Page = () => {
-    const [title, setTitle] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
-    const [admin, setAdmin] = useState<boolean>()
-    useEffect(() => {
-        setAdmin(isAdmin());
+import { notFound, useRouter } from 'next/navigation'
+import axios from 'axios'
+import { Icons } from '@/components/icon'
 
 
-    },[])
 
-    console.log(admin);
+export default function BlogCreationPage() {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [admin, setAdmin] = useState<boolean>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter()
 
-    if(admin == false) return notFound();    
+  useEffect(() => {
+    setAdmin(isAdmin());
+  },[])
+
+  if(admin == false) return notFound();
 
   return (
-    
-    <div className='w-full h-full'>
-        <div className='flex flex-col justify-center items-center h-full w-full'>
-        <h1 className='text-2xl text-gray-500 text-right'>Write a Blog...</h1>
-        
-        
-        
-    </div>
+    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      <Card className="w-full max-w-2xl bg-gray-900 border-gray-800">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-white">Create a New Blog Post</CardTitle>
+          <CardDescription className="text-gray-400">Share your thoughts with the world</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="title" className="text-sm font-medium text-gray-200">Title</label>
+            <Input
+              id="title"
+              placeholder="Enter your blog title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
+            <Textarea
+              id="description"
+              placeholder="Write your blog content here..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="min-h-[200px] bg-gray-800 border-gray-700 text-white placeholder-gray-500"
+              disabled={isLoading}
+            />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button onClick={async() => {
+
+             try {
+                setIsLoading(true);
+                const res = await axios.post("http://localhost:8787/api/v1/blog",{
+                    title: title,
+                    description: description
+                  },{
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                  });
+                  
+                  router.push(`/blog/${res.data.Blog.id}`)
+             } catch (error) {
+                console.log(error)
+                
+             }
+            setIsLoading(false);
+
+
+          }
+          
+          }  className="w-full bg-white text-black hover:bg-gray-200">
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            Publish
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   )
 }
 
-export default Page;
