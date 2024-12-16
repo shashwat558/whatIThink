@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { Textarea } from './ui/textarea';
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
 const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description: string } }) => {
@@ -16,7 +17,7 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8787/api/v1/blog/${blog.id}`, { title, description }, {
+      await axios.put(`${BASE_API_URL}/api/v1/blog/${blog.id}`, { title, description }, {
         headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`
         }

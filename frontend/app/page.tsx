@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 // }
 
 
-
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export default function Home() {
   // const setBlogs = useSetRecoilState(blogState);
   
@@ -27,8 +27,8 @@ export default function Home() {
   
   const handleDelete = async(id: string) => {
     try {
-      await axios.delete(`http://localhost:8787/api/v1/blog/${id}`);
-      setBlogs((prev) => prev.filter((blog) => {blog.id !== id}));
+      await axios.delete(`${BASE_API_URL}/api/v1/blog/${id}`);
+      setBlogs((prev) => prev.filter((blog) => {return blog.id !== id}));
   
     
     }catch(error){
@@ -42,7 +42,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchBlogs(){
       try {
-        const response = await axios.get("http://localhost:8787/api/v1/blog/bulk");
+        const response = await axios.get(`${BASE_API_URL}}/api/v1/blog/bulk`);
         const blogs= response.data.blogs;
         setBlogs(blogs)
         console.log(blogs)

@@ -25,6 +25,9 @@ type AuthFormProps = {
   className?: string;
 };
 
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+
 export  function AuthForm({ type, className }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -42,7 +45,7 @@ export  function AuthForm({ type, className }: AuthFormProps) {
   async function onSubmit(data: z.infer<typeof authSchema>) {
     setIsLoading(true);
     try {
-        const response = await axios.post(`http://localhost:8787/api/v1/user/${type === "signin" ? "signin":"signup"}`, {
+        const response = await axios.post(`${BASE_API_URL}/api/v1/user/${type === "signin" ? "signin":"signup"}`, {
             email: data.email,
             password: data.password
         })

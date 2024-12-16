@@ -14,6 +14,7 @@ import { Editor } from 'primereact/editor';
         
 
 
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
 export default function BlogCreationPage() {
@@ -67,7 +68,7 @@ export default function BlogCreationPage() {
 
              try {
                 setIsLoading(true);
-                const res = await axios.post("http://localhost:8787/api/v1/blog",{
+                const res = await axios.post(`${BASE_API_URL}/api/v1/blog`,{
                     title: title,
                     description: description
                   },{

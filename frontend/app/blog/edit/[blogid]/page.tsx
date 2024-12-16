@@ -3,11 +3,13 @@ import GoBackButton from '@/components/GoBackButton';
 import axios from 'axios';
 import EditBlogForm from '@/components/EditBlog';
 
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 
 
 const getBlogPost = async (blogid: number) => {
   try {
-    const response = await axios.get(`http://localhost:8787/api/v1/blog/${blogid}`);
+    const response = await axios.get(`${BASE_API_URL}/api/v1/blog/${blogid}`);
     return response.data.blog;
   } catch (error) {
     console.error('Failed to fetch blog:', error);
@@ -19,6 +21,7 @@ const getBlogPost = async (blogid: number) => {
 
 
 const EditBlogPage = async ({ params }: { params: { blogid: number } }) => {
+  
   const id = await Number(params.blogid);
   const blog = await getBlogPost(id);
 

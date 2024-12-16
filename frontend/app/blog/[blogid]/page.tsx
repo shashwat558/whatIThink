@@ -6,10 +6,11 @@ import axios from 'axios';
 import React from 'react'
 
 import BlogActions from '@/components/BlogAction';
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getBlogPost = async ({blogid}: {blogid: number}) => {
   try {
-    const response = await axios.get(`http://localhost:8787/api/v1/blog/${blogid}`)
+    const response = await axios.get(`${BASE_API_URL}/api/v1/blog/${blogid}`)
   const blog = response.data.blog;
   return blog;
   } catch (error) {
