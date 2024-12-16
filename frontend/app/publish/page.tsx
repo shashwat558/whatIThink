@@ -3,14 +3,16 @@
 import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { isAdmin } from '@/lib/utils'
 import { notFound, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Icons } from '@/components/icon'
-import Editor from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
+import { Editor } from 'primereact/editor';
+        
+
 
 
 
@@ -52,9 +54,10 @@ export default function BlogCreationPage() {
               id="description"
               placeholder="Write your blog content here..."
               value={description}
-              onChange={(value) => setDescription(value)} 
+              onTextChange={(e) => setDescription(e.htmlValue?? "")} 
+
               theme="snow"
-              className="min-h-[200px] bg-gray-700 border-gray-500 text-white placeholder-gray-500"
+              className="min-h-[200px] bg-black border-gray-500 text-white placeholder-gray-500"
             />
             
           </div>

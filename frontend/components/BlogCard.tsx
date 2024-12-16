@@ -2,7 +2,7 @@ import React from 'react'
 import { CalendarIcon, ClockIcon, UserIcon } from 'lucide-react';
 
 import Link from 'next/link'
-import { formateDate } from '@/lib/utils'
+import { formateDate, isAdmin } from '@/lib/utils'
 import TrashIcon from './TrashIcon';
 
 
@@ -40,7 +40,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <div className='flex justify-between'> <h2 className="mb-2 text-2xl font-bold tracking-tight">
           {title}
         </h2>
-        <TrashIcon onDelete={() => onDelete(id)} />
+        {isAdmin() ?<TrashIcon onDelete={() => onDelete(id)} />: ""}
         </div>
         
         {truncatedDescription && (

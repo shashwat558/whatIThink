@@ -3,7 +3,7 @@
 import GoBackButton from '@/components/GoBackButton';
 import { formateDate } from '@/lib/utils';
 import axios from 'axios';
-
+import { FiEdit } from "react-icons/fi";
 import React from 'react'
 
 const getBlogPost = async ({blogid}: {blogid: number}) => {
@@ -30,7 +30,10 @@ const Page = async ({ params }: { params: { blogid: number } }) => {
      <GoBackButton />
      </div>
     <header className="mb-8">
+      <div className='flex justify-between'>
       <h1 className="text-3xl font-bold mb-2">{blog.title}</h1>
+      <FiEdit className='cursor-pointer hover:opacity-[0.5]'/>
+      </div>
       <div className="text-sm text-gray-500 flex items-center space-x-4">
         <time dateTime={blog.publishedDate}>{formateDate(blog.publishedDate)}</time>
         <span>•</span>
