@@ -42,7 +42,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchBlogs(){
       try {
-        const response = await axios.get(`${BASE_API_URL}}/api/v1/blog/bulk`);
+        const response = await axios.get(`${BASE_API_URL}/api/v1/blog/bulk`);
         const blogs= response.data.blogs;
         setBlogs(blogs)
         console.log(blogs)
