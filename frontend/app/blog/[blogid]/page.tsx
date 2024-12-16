@@ -1,10 +1,11 @@
 
 
 import GoBackButton from '@/components/GoBackButton';
-import { formateDate } from '@/lib/utils';
+import { formateDate} from '@/lib/utils';
 import axios from 'axios';
-import { FiEdit } from "react-icons/fi";
 import React from 'react'
+
+import BlogActions from '@/components/BlogAction';
 
 const getBlogPost = async ({blogid}: {blogid: number}) => {
   try {
@@ -20,7 +21,7 @@ const getBlogPost = async ({blogid}: {blogid: number}) => {
 
 
 const Page = async ({ params }: { params: { blogid: number } }) => {
-  const id = await params.blogid;
+  const id = params.blogid;
   const blog = await getBlogPost({blogid: Number(id)});
   console.log(blog)
 
@@ -31,8 +32,9 @@ const Page = async ({ params }: { params: { blogid: number } }) => {
      </div>
     <header className="mb-8">
       <div className='flex justify-between'>
+        
       <h1 className="text-3xl font-bold mb-2">{blog.title}</h1>
-      <FiEdit className='cursor-pointer hover:opacity-[0.5]'/>
+      <BlogActions id={blog.id}/>
       </div>
       <div className="text-sm text-gray-500 flex items-center space-x-4">
         <time dateTime={blog.publishedDate}>{formateDate(blog.publishedDate)}</time>

@@ -138,8 +138,9 @@ blogRouter.delete("/:id", async (c) => {
     
 })
 
-blogRouter.put('/', async (c) => {
+blogRouter.put('/:id', async (c) => {
     const body = await c.req.json()
+    const blogId = c.req.param("id");
     const parsedData = updateBlogSchema.safeParse(body);
     if(!parsedData.success){
         return c.json({message: "Validation failed"}, 400)
@@ -147,10 +148,10 @@ blogRouter.put('/', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
     }).$extends(withAccelerate());
-
+     
     const blogToUpdate = await prisma.blog.update({
         where: {
-            id: parsedData.data.id
+            id: Number(blogId)
         },
         data:{
             title: parsedData.data.title,
