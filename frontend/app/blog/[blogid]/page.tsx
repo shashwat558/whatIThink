@@ -21,10 +21,14 @@ const getBlogPost = async ({blogid}: {blogid: number}) => {
 }
 
 
-const Page = async ({ params }: { params: { blogid: number } }) => {
-  const id = params.blogid;
-  const blog = await getBlogPost({blogid: Number(id)});
-  console.log(blog)
+const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
+  
+  
+ 
+  const { blogid }  = await params
+  const blog = await getBlogPost({blogid: blogid});
+
+  
 
   return (
     <article className="mt-10 max-w-2xl mx-auto px-4 py-12">

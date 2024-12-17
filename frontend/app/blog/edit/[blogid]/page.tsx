@@ -20,10 +20,10 @@ const getBlogPost = async (blogid: number) => {
 
 
 
-const EditBlogPage = async ({ params }: { params: { blogid: number } }) => {
+const EditBlogPage = async ({ params }: { params: Promise<{ blogid: number }> }) => {
   
-  const id = await Number(params.blogid);
-  const blog = await getBlogPost(id);
+  const { blogid }  = await params
+  const blog = await getBlogPost(blogid);
 
  
 
