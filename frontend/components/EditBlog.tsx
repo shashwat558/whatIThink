@@ -48,7 +48,7 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
           Description
         </label>
         <Textarea
-              id="description"
+              id="editor"
               placeholder="Write your blog content here..."
               value={description}
               onChange={(e) => setDescription(e.target.value)} 

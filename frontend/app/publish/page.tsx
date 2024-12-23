@@ -10,7 +10,7 @@ import { notFound, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Icons } from '@/components/icon'
 
-import { Editor } from 'primereact/editor';
+
         
 
 
@@ -51,13 +51,13 @@ export default function BlogCreationPage() {
           </div>
           <div className="space-y-2">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
-            <Editor
-              id="description"
+            <textarea
+              id="editor"
               placeholder="Write your blog content here..."
               value={description}
-              onTextChange={(e) => setDescription(e.htmlValue?? "")} 
+              onChange={(e) => setDescription(e.target.value)} 
 
-              theme="snow"
+              
               className="min-h-[200px] bg-black border-gray-500 text-white placeholder-gray-500"
             />
             
