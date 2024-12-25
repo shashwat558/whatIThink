@@ -9,6 +9,7 @@ import { isAdmin } from '@/lib/utils'
 import { notFound, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Icons } from '@/components/icon'
+import { TextEditor } from '@/components/TextEditor'
 
 
         
@@ -49,17 +50,9 @@ export default function BlogCreationPage() {
               disabled={isLoading}
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 flex flex-col overflow-y-scroll">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
-            <textarea
-              id="editor"
-              placeholder="Write your blog content here..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} 
-
-              
-              className="min-h-[200px] bg-black border-gray-500 text-white placeholder-gray-500"
-            />
+            <TextEditor content={description} onContentChange={setDescription}/>
             
           </div>
         </CardContent>

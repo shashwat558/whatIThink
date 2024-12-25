@@ -34,7 +34,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       : description
 
   return (
-    <div className="relative overflow-hidden   border-gray-600 bg-[#353941] text-white shadow-md transition-all hover:shadow-lg w-[600px] border-l-[1px] border-b-[1px]">
+    <div className="relative overflow-hidden text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]   transition-all  hover:shadow-lg w-[600px] border-l-[1px] border-b-[1px] min-h-[250px] min-w-[400px]">
         
         <div className="relative z-10 p-6">
         <div className='flex justify-between'> <h2 className="mb-2 text-2xl font-bold tracking-tight">

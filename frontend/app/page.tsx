@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 // import { blogState } from "@/state/state";
 import { Blog } from "@/types/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 
 // import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -20,8 +21,8 @@ import { useEffect, useState } from "react";
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export default function Home() {
-  // const setBlogs = useSetRecoilState(blogState);
-  
+ 
+   // const setBlogs = useSetRecoilState(blogState);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   
@@ -55,9 +56,9 @@ export default function Home() {
     fetchBlogs()
   },[setBlogs])
 
-  const filteredBlogs = blogs.filter(blog => {
-    return blog.title.toLowerCase().includes(searchText.toLowerCase());
-  })
+  const filteredBlogs= useMemo(() => {
+    return blogs.filter(post => post.title.toLowerCase().includes(searchText.toLowerCase()));
+  }, [searchText, blogs]);
 
 
   return (
@@ -69,7 +70,7 @@ export default function Home() {
         <div>
           <Input placeholder="Search..." type="text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex gap-4 flex-wrap">
         
         {filteredBlogs.map((blog) => (
       <BlogCard 
