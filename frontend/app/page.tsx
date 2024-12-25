@@ -62,15 +62,15 @@ export default function Home() {
 
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen ">
-      <div className="flex flex-col justify-center items-start absolute top-[100px] left-[400px]">
+    <div className="flex justify-center items-center w-screen md:h-screen sm:overflow-y-scroll min-h-screen ">
+      <div className="flex flex-col justify-center items-start md:absolute md:top-[100px] md:left-[400px]  mb-10">
         <div className="">
-          <h1 className="text-5xl tracking-tight border-b-[1.5px] border-b-gray-800 p-3">So, this is what i think</h1>
+          <h1 className="md:text-5xl text-3xl font-semibold md:font-normal tracking-tight border-b-[1.5px] border-b-gray-800 p-3">So, this is what i think</h1>
         </div>
-        <div>
+        <div className="ml-3 mt-2">
           <Input placeholder="Search..." type="text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
         </div>
-        <div className="mt-4 flex gap-4 flex-wrap">
+        <div className="mt-4 flex gap-4 flex-wrap m-2">
         
         {filteredBlogs.map((blog) => (
       <BlogCard 

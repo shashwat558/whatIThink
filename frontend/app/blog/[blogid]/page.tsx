@@ -32,7 +32,7 @@ const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
 
   return (
     <article className="mt-10 max-w-2xl mx-auto px-4 py-12">
-     <div className='absolute top-10 left-4'>
+     <div className=' top-10 left-4 z-10 sticky'>
      <GoBackButton />
      </div>
     <header className="mb-8">

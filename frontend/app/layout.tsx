@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { RecoilContextProvider } from "@/lib/RecoilContextProvider";
 import { AppBar } from "@/components/AppBar";
+import Footer from "@/components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#000000] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#000000] text-white `}
       >
         
         <AppBar />
@@ -37,6 +38,7 @@ export default function RootLayout({
         {children}
 
         </RecoilContextProvider>
+        <Footer />
       </body>
     </html>
   );
