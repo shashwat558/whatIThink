@@ -63,7 +63,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center items-center w-screen md:h-screen sm:overflow-y-scroll min-h-screen overflow-x-hidden">
-      <div className="flex flex-col justify-center items-start md:absolute md:top-[100px] md:left-[400px]  mb-10">
+      <div className="flex flex-col justify-center items-start absolute md:top-[100px] md:left-[400px] mt-5  mb-10 top-[30px]">
         <div className="">
           <h1 className="md:text-5xl text-3xl font-semibold md:font-normal tracking-tight border-b-[1.5px] border-b-gray-800 p-3">So, this is what i think</h1>
         </div>
