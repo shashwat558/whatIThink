@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import { Textarea } from './ui/textarea';
+
+import JoditEditor from 'jodit-react';
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
@@ -12,6 +13,7 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
   const [title, setTitle] = useState(blog.title);
   const [description, setDescription] = useState(blog.description);
   const router = useRouter();
+  const editor = useRef(null)
   
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,13 +49,13 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
         <label htmlFor="description" className="block font-medium">
           Description
         </label>
-        <Textarea
-              id="editor"
-              placeholder="Write your blog content here..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} 
-              className="min-h-[400px] bg-black border-gray-500 text-white placeholder-gray-500"
-            />
+
+       <JoditEditor className='bg-gray-600 text-black'
+       ref={editor}
+       value={description}
+       onChange={(newContent) => setDescription(newContent)} 
+       
+       /> 
       </div>
       <button
         type="submit"

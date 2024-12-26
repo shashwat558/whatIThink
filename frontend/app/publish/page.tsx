@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -9,7 +9,8 @@ import { isAdmin } from '@/lib/utils'
 import { notFound, useRouter } from 'next/navigation'
 import axios from 'axios'
 import { Icons } from '@/components/icon'
-import { TextEditor } from '@/components/TextEditor'
+// import { TextEditor } from '@/components/TextEditor'
+import JoditEditor from 'jodit-react';
 
 
         
@@ -23,6 +24,7 @@ export default function BlogCreationPage() {
   const [description, setDescription] = useState('')
   const [admin, setAdmin] = useState<boolean>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const editor = useRef(null);
   const router = useRouter()
 
   useEffect(() => {
@@ -52,7 +54,14 @@ export default function BlogCreationPage() {
           </div>
           <div className="space-y-2 flex flex-col overflow-y-scroll">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
-            <TextEditor content={description} onContentChange={setDescription}/>
+            {/* <TextEditor content={description} onContentChange={setDescription}/> */}
+            <JoditEditor 
+              ref={editor}
+              value={description}
+              onChange={newDesc => setDescription(newDesc)}
+              className='overflow-y-scroll'
+            />
+
             
           </div>
         </CardContent>

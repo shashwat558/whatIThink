@@ -29,7 +29,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       : description;
 
   return (
-    <div className="relative overflow-hidden text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] transition-all hover:shadow-lg w-full sm:max-w-[380px] md:max-w-[500px] lg:max-w-[600px] min-h-[250px]">
+    <div className="relative overflow-hidden text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] transition-all hover:shadow-lg w-full sm:max-w-[380px] md:max-w-[500px] lg:max-w-[600px] min-h-[250px] md:max-h-[300px]">
       <div className="relative z-10 p-6">
         <div className="flex justify-between flex-wrap">
           <h2 className="mb-2 text-xl sm:text-2xl font-bold tracking-tight">
@@ -39,8 +39,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
         </div>
 
         {truncatedDescription && (
-          <p className="mb-4 text-gray-300 text-sm sm:text-base">
-            {truncatedDescription}
+          <p className="mb-4 text-gray-300 text-sm sm:text-base" dangerouslySetInnerHTML={{__html: truncatedDescription}} >
+            
           </p>
         )}
         

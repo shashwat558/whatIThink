@@ -47,9 +47,11 @@ const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
         <span>{blog.readingTime} min read</span>
       </div>
     </header>
-    <div className="prose max-w-none">
-      <p className="text-lg text-gray-400 leading-relaxed">{blog.description}</p>
-    </div>
+    <div
+        className="prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: blog.description }} // Correct usage
+      />
+    
   </article>
   );
 };

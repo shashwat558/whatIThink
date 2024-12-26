@@ -68,7 +68,7 @@ export default function Home() {
           <h1 className="md:text-5xl text-3xl font-semibold md:font-normal tracking-tight border-b-[1.5px] border-b-gray-800 p-3">So, this is what i think</h1>
         </div>
         <div className="ml-3 mt-2">
-          <Input placeholder="Search..." type="text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
+          <Input className="font-semibold border-4 rounded-lg" placeholder="Search..." type="text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
         </div>
         <div className="mt-4 flex gap-4 flex-wrap m-2">
         
