@@ -11,7 +11,8 @@ import axios from 'axios'
 import { Icons } from '@/components/icon'
 // import { TextEditor } from '@/components/TextEditor'
 
-import { TextEditor } from '@/components/TextEditor'
+// import { TextEditor } from '@/components/TextEditor'
+import { Textarea } from '@/components/ui/textarea'
 
 
         
@@ -55,13 +56,15 @@ export default function BlogCreationPage() {
           </div>
           <div className="space-y-2 flex flex-col overflow-y-scroll">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
-            <TextEditor content={description} onContentChange={setDescription}/>
-            {/* <JoditEditor 
-              ref={editor}
+            {/* <TextEditor content={description} onContentChange={setDescription}/> */}
+            <Textarea
+              id="editor"
+              placeholder="Write your blog content here..."
               value={description}
-              onChange={newDesc => setDescription(newDesc)}
-              
-            /> */}
+              onChange={(e) => setDescription(e.target.value)} 
+              className="min-h-[400px] bg-black border-gray-500 text-white placeholder-gray-500"
+            />
+            
 
             
           </div>

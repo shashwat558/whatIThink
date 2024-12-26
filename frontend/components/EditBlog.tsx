@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-
-import { TextEditor } from './TextEditor';
+import { Textarea } from './ui/textarea';
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
@@ -48,11 +47,13 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
         <label htmlFor="description" className="block font-medium">
           Description
         </label>
-       
-              
-              <TextEditor content={description} onContentChange={setDescription}/> 
-              
-            /
+        <Textarea
+              id="editor"
+              placeholder="Write your blog content here..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)} 
+              className="min-h-[400px] bg-black border-gray-500 text-white placeholder-gray-500"
+            />
       </div>
       <button
         type="submit"
