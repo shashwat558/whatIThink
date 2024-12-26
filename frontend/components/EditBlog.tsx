@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 
-import JoditEditor from 'jodit-react';
+import { TextEditor } from './TextEditor';
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
@@ -13,7 +13,6 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
   const [title, setTitle] = useState(blog.title);
   const [description, setDescription] = useState(blog.description);
   const router = useRouter();
-  const editor = useRef(null)
   
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,13 +48,11 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
         <label htmlFor="description" className="block font-medium">
           Description
         </label>
-
-       <JoditEditor className='bg-gray-600 text-black'
-       ref={editor}
-       value={description}
-       onChange={(newContent) => setDescription(newContent)} 
        
-       /> 
+              
+              <TextEditor content={description} onContentChange={setDescription}/> 
+              
+            /
       </div>
       <button
         type="submit"

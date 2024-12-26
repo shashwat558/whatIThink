@@ -12,6 +12,8 @@ export const TextEditor: React.FC<EditorProps> = ({content, onContentChange}) =>
     const editor = useEditor({
         extensions: [StarterKit],
         content: content ?? <p>Write something</p>,
+        immediatelyRender: true,
+        shouldRerenderOnTransaction: false,
         onUpdate: ({editor}) => {
             let updatedContent = editor.getHTML();
                 updatedContent = updatedContent.replace(/<p>(\s|&nbsp;)*<\/p>/g, '');
