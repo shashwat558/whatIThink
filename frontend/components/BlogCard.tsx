@@ -1,71 +1,117 @@
-import React from 'react'
-import { CalendarIcon, ClockIcon, UserIcon } from 'lucide-react';
-import Link from 'next/link'
-import { formateDate, isAdmin } from '@/lib/utils'
-import TrashIcon from './TrashIcon';
 
-interface BlogCardProps {
-  id: string
-  title: string
-  description: string
-  readingTime: string
-  publishedDate: string
-  author?: string
+import { Blog } from "@/types/types";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+import { CalendarIcon, ClockIcon, UserIcon, Trash2 } from "lucide-react";
+import { cn, formateDate } from "@/lib/utils";
+import { motion } from "framer-motion";
+
+interface BlogCardProps extends Blog {
   onDelete: (id: string) => void;
+  author?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({
-  id,
-  title,
-  description = '',
-  author,
-  readingTime,
-  publishedDate,
-  onDelete
-}) => {
-  const truncatedDescription =
-    description && description.length > 100
-      ? `${description.substring(0, 100)}...`
-      : description;
+const BlogCard = ({ 
+  id, 
+  title, 
+  description, 
+  publishedDate, 
+  readingTime, 
+  onDelete, 
+  author = "Shashwat" 
+}: BlogCardProps) => {
+  const [isHovering, setIsHovering] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      await onDelete(id);
+    } catch (error) {
+      console.error("Failed to delete blog:", error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  
+  
+  const truncatedDescription = description && description.length > 100
+    ? `${description.substring(0, 100)}...`
+    : description;
 
   return (
-    <div className="relative overflow-hidden text-sky-200 border-2 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] transition-all hover:shadow-lg w-full sm:max-w-[380px] md:max-w-[500px] lg:max-w-[600px] min-h-[250px] md:max-h-[300px]">
-      <div className="relative z-10 p-6">
-        <div className="flex justify-between flex-wrap">
-          <h2 className="mb-2 text-xl sm:text-2xl font-bold tracking-tight">
-            {title}
-          </h2>
-          {isAdmin() ? <TrashIcon onDelete={() => onDelete(id)} /> : ""}
-        </div>
-
-        {truncatedDescription && (
-          <p className="mb-4 text-gray-300 text-sm sm:text-base" dangerouslySetInnerHTML={{__html: truncatedDescription}} >
-            
-          </p>
-        )}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[1px] transition-all duration-300 hover:scale-[1.01]"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Animated gradient border effect */}
+      <div className="absolute inset-[-1px] rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-10 blur-xl transition-all duration-500 group-hover:opacity-20" />
+      
+      <div className="relative rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6 h-full">
+        {/* Subtle radial gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
         
-        <Link href={`/blog/${id}`} className='text-sm mb-3 underline'>
-          Read more
-        </Link>
-
-        <div className="mb-4 flex items-center space-x-2 text-sm text-gray-400">
-          <UserIcon className="h-4 w-4" />
-          <span className="text-xs sm:text-sm">{author ? author : "Shashwat"}</span>
-        </div>
-
-        <div className="flex items-center justify-between text-xs sm:text-sm text-gray-400">
-          <div className="flex items-center space-x-2">
-            <ClockIcon className="h-4 w-4" />
-            <span>{readingTime} min read</span>
+        <div className="relative z-10">
+          <div className="flex justify-between items-start mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {title}
+            </h2>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "text-gray-400 hover:text-red-500 hover:bg-red-900/20 rounded-full transition-all duration-300",
+                isHovering ? "opacity-100" : "opacity-0"
+              )}
+              onClick={handleDelete}
+              disabled={isDeleting}
+            >
+              <Trash2 className={cn("h-4 w-4", isDeleting && "animate-pulse")} />
+            </Button>
           </div>
-          <div className="flex items-center space-x-2">
-            <CalendarIcon className="h-4 w-4" />
-            <span>{formateDate(publishedDate)}</span>
+
+          {truncatedDescription && (
+            <p className="mb-4 text-gray-300/90 text-sm sm:text-base leading-relaxed">
+              {truncatedDescription}
+            </p>
+          )}
+          
+          <motion.a 
+            href={`/blog/${id}`}
+            whileHover={{ x: 5 }}
+            className="inline-block text-sm mb-4 text-blue-400 hover:text-blue-300 transition-colors duration-200"
+          >
+            Read more →
+          </motion.a>
+
+          <div className="space-y-3 text-gray-400/90">
+            <div className="flex items-center space-x-2 text-sm">
+              <UserIcon className="h-4 w-4 text-blue-400/80" />
+              <span className="text-xs sm:text-sm">{author}</span>
+            </div>
+
+            <div className="flex items-center justify-between text-xs sm:text-sm border-t border-gray-700/50 pt-3">
+              <div className="flex items-center space-x-2">
+                <ClockIcon className="h-4 w-4 text-purple-400/80" />
+                <span>{readingTime} min read</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CalendarIcon className="h-4 w-4 text-pink-400/80" />
+                <span>{formateDate(publishedDate)}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
 
 export default BlogCard;
