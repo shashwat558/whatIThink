@@ -29,7 +29,7 @@ export default function Home() {
         const response = await axios.get(`${BASE_API_URL}/api/v1/blog/bulk`);
         const blogs = response.data.blogs;
         const sortedBlogs = [...blogs].sort((a, b) => {
-          console
+          
           return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime();
          
         })
