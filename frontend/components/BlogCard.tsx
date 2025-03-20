@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import { CalendarIcon, ClockIcon, UserIcon, Trash2 } from "lucide-react";
-import { cn, formateDate } from "@/lib/utils";
+import { cn, formateDate, isAdmin } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -24,6 +24,10 @@ const BlogCard = ({
 }: BlogCardProps) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const admin = isAdmin();
+
+
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -64,6 +68,7 @@ const BlogCard = ({
               {title}
             </h2>
             
+           {admin && (
             <Button
               variant="ghost"
               size="icon"
@@ -76,6 +81,7 @@ const BlogCard = ({
             >
               <Trash2 className={cn("h-4 w-4", isDeleting && "animate-pulse")} />
             </Button>
+           )}
           </div>
 
           {truncatedDescription && (
