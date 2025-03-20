@@ -1,3 +1,10 @@
+import z from "zod";
+
+export const blogSchema = z.object({
+    title: z.string().max(50).nonempty("Text is required"),
+    description: z.string().nonempty("Text is required")
+})
+
 export interface Blog {
     id: string;
     title: string;
@@ -12,3 +19,4 @@ export interface User {
     password: string;
     role: string;
 }
+

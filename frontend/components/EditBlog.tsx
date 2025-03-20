@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import { Textarea } from './ui/textarea';
+
+import Tiptap from './tiptap';
+import { blogSchema } from '@/types/types';
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 
@@ -15,7 +17,13 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
   
 
   const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
+    const validatedData = blogSchema.safeParse({title, description});
+    if(!validatedData.success){
+      alert("What the heck")
+      return null;
+    }
     try {
       await axios.put(`${BASE_API_URL}/api/v1/blog/${blog.id}`, { title, description }, {
         headers: {
@@ -47,13 +55,7 @@ const EditBlogForm = ({ blog }: { blog: { id: number; title: string; description
         <label htmlFor="description" className="block font-medium">
           Description
         </label>
-        <Textarea
-              id="editor"
-              placeholder="Write your blog content here..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} 
-              className="min-h-[400px] bg-black border-gray-500 text-white placeholder-gray-500"
-            />
+        <Tiptap content={description} onChange={(e) => setDescription(e)}/>
       </div>
       <button
         type="submit"

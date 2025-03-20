@@ -32,10 +32,10 @@ const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
 
   return (
     <article className="mt-10 max-w-2xl mx-auto px-4 py-12">
-     <div className=' top-10 left-4 z-10 sticky'>
+     <div className=' top-10 left-2 z-10 sticky'>
      <GoBackButton />
      </div>
-    <header className="mb-8">
+    <header className="mt-6 mb-8">
       <div className='flex justify-between'>
         
       <h1 className="text-3xl font-bold mb-2">{blog.title}</h1>
@@ -49,8 +49,8 @@ const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
     </header>
     <div
         className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: blog.description }} // Correct usage
-        style={{ whiteSpace: 'pre-wrap' }}
+        dangerouslySetInnerHTML={{ __html: blog.description.replace(/\n/g, '<br/>') }} // Correct usage
+        style={{ whiteSpace: 'pre-line' }}
       />
     
   </article>

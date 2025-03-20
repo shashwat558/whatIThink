@@ -1,7 +1,7 @@
 "use client"
 import { type Editor } from "@tiptap/react"
 import { Toggle } from "./ui/toggle"
-import { Bold, Code, Heading2, Italic, List, ListOrdered, Redo, Strikethrough, Undo } from "lucide-react"
+import { Bold, Code, Heading2, Italic, List, ListOrdered, Redo, Strikethrough, Underline, Undo } from "lucide-react"
 
 type Props = {
     editor: Editor | null
@@ -108,6 +108,7 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleUnderline().run()
         }}
         >
+            <Underline className="w-5 h-5"/>
 
         </Toggle>
 

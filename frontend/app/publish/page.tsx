@@ -14,6 +14,7 @@ import { Icons } from '@/components/icon'
 // import { TextEditor } from '@/components/TextEditor'
 
 import Tiptap from '@/components/tiptap'
+import { blogSchema } from '@/types/types'
 
 
         
@@ -35,6 +36,7 @@ export default function BlogCreationPage() {
   },[])
 
   if(admin == false) return notFound();
+  
 
   return (
     <div className="min-h-screen overflow-hidden  text-white flex items-center justify-center p-4 w-full">
@@ -48,6 +50,8 @@ export default function BlogCreationPage() {
             <label htmlFor="title" className="text-sm font-medium text-gray-200">Title</label>
             <Input
               id="title"
+              required
+              
               placeholder="Enter your blog title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -68,8 +72,17 @@ export default function BlogCreationPage() {
         <CardFooter>
           <Button onClick={async() => {
 
+             const validatedData = blogSchema.safeParse({title, description});
+                if(!validatedData.success){
+                  alert("Please enter title and description")
+                  return null;
+                }
+
              try {
                 setIsLoading(true);
+               
+                  
+                
                 const res = await axios.post(`${BASE_API_URL}/api/v1/blog`,{
                     title: title,
                     description: description
