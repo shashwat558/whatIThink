@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon, ClockIcon, UserIcon, Trash2 } from "lucide-react";
 import { cn, formateDate } from "@/lib/utils";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface BlogCardProps extends Blog {
   onDelete: (id: string) => void;
@@ -82,14 +83,16 @@ const BlogCard = ({
         style={{ whiteSpace: 'pre-wrap' }} className="mb-4 text-gray-300/90 text-sm sm:text-base leading-relaxed prose max-w-none " />
 
           )}
-          
-          <motion.a 
-            href={`/blog/${id}`}
+          <Link href={`/blog/${id}`}>
+           <motion.p 
+            // href={`/blog/${id}`}
             whileHover={{ x: 5 }}
             className="inline-block text-sm mb-4 text-blue-400 hover:text-blue-300 transition-colors duration-200"
           >
             Read more →
-          </motion.a>
+          </motion.p>
+          </Link>
+          
 
           <div className="space-y-3 text-gray-400/90">
             <div className="flex items-center space-x-2 text-sm">
