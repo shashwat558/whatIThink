@@ -34,7 +34,7 @@ export default function Home() {
          
         })
         setBlogs(sortedBlogs)
-        console.log(sortedBlogs)
+        
       } catch (error) {
         console.log(error)
       }
