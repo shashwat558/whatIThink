@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+
+import {Libre_Baskerville} from "next/font/google"
 import "./globals.css";
 import { RecoilContextProvider } from "@/lib/RecoilContextProvider";
 import { AppBar } from "@/components/AppBar";
 // import Footer from "@/components/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+
+const libre = Libre_Baskerville({
+  weight: "400",
+  subsets: ["latin"]
+  
+})
+
 
 export const metadata: Metadata = {
   title: "It's what i think",
@@ -29,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#000000] text-white `}
+        className={`${libre.className} antialiased bg-[#000000] text-white `}
       >
         
         <AppBar />

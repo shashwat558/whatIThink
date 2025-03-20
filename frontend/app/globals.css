@@ -5,7 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Parkinsans:wght@300..800&family=Teko:wght@300..700&display=swap');
 body {
   @apply font-teko;
+  background-image: url("../public/nnnoise.svg");
+  background-attachment: fixed; /* Keep the background fixed */
+  background-size: cover; /* Optionally, to make the image cover the entire body */
 }
+
 
 @layer base {
   :root {

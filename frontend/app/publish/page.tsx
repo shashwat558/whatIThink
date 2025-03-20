@@ -12,7 +12,8 @@ import { Icons } from '@/components/icon'
 // import { TextEditor } from '@/components/TextEditor'
 
 // import { TextEditor } from '@/components/TextEditor'
-import { Textarea } from '@/components/ui/textarea'
+
+import Tiptap from '@/components/tiptap'
 
 
         
@@ -36,8 +37,8 @@ export default function BlogCreationPage() {
   if(admin == false) return notFound();
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-      <Card className="w-import {Editor, EditorState} from 'draft-js';full max-w-2xl bg-gray-900 border-gray-800">
+    <div className="min-h-screen  text-white flex items-center justify-center p-4 w-full">
+      <Card className="w-import {Editor, EditorState} from 'draft-js';full backdrop-blur-sm bg-transparent w-[60pc] fixed">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-white">Create a New Blog Post</CardTitle>
           <CardDescription className="text-gray-400">Share your thoughts with the world</CardDescription>
@@ -54,16 +55,11 @@ export default function BlogCreationPage() {
               disabled={isLoading}
             />
           </div>
-          <div className="space-y-2 flex flex-col overflow-y-scroll">
+          <div className="space-y-2 flex flex-col overflow-y-scroll w-full h-full">
             <label htmlFor="description" className="text-sm font-medium text-gray-200">Description</label>
             {/* <TextEditor content={description} onContentChange={setDescription}/> */}
-            <Textarea
-              id="editor"
-              placeholder="Write your blog content here..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)} 
-              className="min-h-[400px] bg-black border-gray-500 text-white placeholder-gray-500"
-            />
+            <Tiptap content={description} onChange={(e) => setDescription(e)} />
+
             
 
             

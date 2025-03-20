@@ -40,7 +40,7 @@ export default function Home() {
   }, [searchText, blogs]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] animate-gradient-x">
+    <div className="min-h-screen animate-gradient-x">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-12 animate-fade-in">
           {/* Header Section */}
