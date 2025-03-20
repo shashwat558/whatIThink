@@ -50,6 +50,7 @@ const Page = async ({params}:{params:Promise<{blogid: number}>}) => {
     <div
         className="prose max-w-none"
         dangerouslySetInnerHTML={{ __html: blog.description }} // Correct usage
+        style={{ whiteSpace: 'pre-wrap' }}
       />
     
   </article>

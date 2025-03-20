@@ -1,7 +1,7 @@
 "use client"
 import { type Editor } from "@tiptap/react"
 import { Toggle } from "./ui/toggle"
-import { Bold, Code, Heading2, Italic, List, ListOrdered, Strikethrough } from "lucide-react"
+import { Bold, Code, Heading2, Italic, List, ListOrdered, Redo, Strikethrough, Undo } from "lucide-react"
 
 type Props = {
     editor: Editor | null
@@ -19,7 +19,7 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleHeading({level: 2}).run()
         }}
         >
-        <Heading2 className="h-4 w-4"/>
+        <Heading2 className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
@@ -28,7 +28,7 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleItalic().run()
         }}
         >
-            <Italic className="h-4 w-4"/>
+            <Italic className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
@@ -37,7 +37,7 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleBold().run()
         }}
         >
-            <Bold className="h-4 w-4"/>
+            <Bold className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
@@ -46,16 +46,16 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleStrike().run()
         }}
         >
-            <Strikethrough className="h-4 w-4"/>
+            <Strikethrough className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
-        pressed= {editor.isActive("List")}
+        pressed= {editor.isActive("bulletList")}
         onPressedChange={() => {
             editor.chain().focus().toggleBulletList().run()
         }}
         >
-            <List className="h-4 w-4"/>
+            <List className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
@@ -65,16 +65,50 @@ export function Toolbar({editor}: Props){
             editor.chain().focus().toggleOrderedList().run()
         }}
         >
-            <ListOrdered className="h-4 w-4"/>
+            <ListOrdered className="h-5 w-5"/>
         </Toggle>
         <Toggle 
         size={"sm"}
-        pressed= {editor.isActive("Code")}
+        pressed= {editor.isActive("CodeBlock")}
         onPressedChange={() => {
-            editor.chain().focus().toggleCode().run()
+            editor.chain().focus().toggleCodeBlock().run()
         }}
         >
-            <Code className="h-4 w-4"/>
+            <Code className="h-5 w-5"/>
+        </Toggle>
+        
+ 
+         <Toggle
+         size={"sm"}
+         pressed={editor.isActive("undo")}
+         onPressedChange={() => {
+            
+            editor.chain().focus().undo().run();
+          }}
+         
+        >
+          <Undo className="w-5 h-5" />
+        </Toggle>
+        <Toggle
+        size={"sm"}
+        pressed={editor.isActive("redo")}
+
+          onPressedChange={() => {
+            
+            editor.chain().focus().redo().run();
+          }}
+          
+        >
+          <Redo className="w-5 h-5" />
+        </Toggle>
+        <Toggle
+        size={"sm"}
+        pressed={editor.isActive("underline")}
+        onPressedChange={() => {
+            editor.chain().focus().toggleUnderline().run()
+        }}
+        >
+
         </Toggle>
 
 

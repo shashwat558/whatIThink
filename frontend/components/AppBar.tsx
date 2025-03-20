@@ -3,7 +3,7 @@ import { Github, Linkedin } from 'lucide-react';
 
 export function AppBar() {
   return (
-    <header className="w-screen md:sticky md:top-0 md:z-50 px-4 py-3 fixed">
+    <header className="w-screen md:sticky md:top-0 md:z-50 px-4 py-3 fixed overflow-hidden">
       <div className="flex md:justify-end items-center">
         <nav>
           <ul className="flex space-x-4">

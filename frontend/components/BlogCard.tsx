@@ -46,12 +46,12 @@ const BlogCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-[1px] transition-all duration-300 hover:scale-[1.01]"
+      className="group relative overflow-hidden rounded-xl bg-gradient-to-br  p-[1px] transition-all duration-300 hover:scale-[1.01]"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       {/* Animated gradient border effect */}
-      <div className="absolute inset-[-1px] rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-10 blur-xl transition-all duration-500 group-hover:opacity-20" />
+      <div className="absolute inset-[-1px] rounded-xl  opacity-10 blur-xl transition-all duration-500 group-hover:opacity-20" />
       
       <div className="relative rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6 h-full">
         {/* Subtle radial gradient overlay */}
@@ -59,7 +59,7 @@ const BlogCard = ({
         
         <div className="relative z-10">
           <div className="flex justify-between items-start mb-4">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-gray-400 via-gray-200 to-gray-500 bg-clip-text text-transparent ">
               {title}
             </h2>
             
@@ -78,9 +78,9 @@ const BlogCard = ({
           </div>
 
           {truncatedDescription && (
-            <p className="mb-4 text-gray-300/90 text-sm sm:text-base leading-relaxed">
-              {truncatedDescription}
-            </p>
+            <div dangerouslySetInnerHTML={{ __html: truncatedDescription}} // Correct usage
+        style={{ whiteSpace: 'pre-wrap' }} className="mb-4 text-gray-300/90 text-sm sm:text-base leading-relaxed prose max-w-none " />
+
           )}
           
           <motion.a 

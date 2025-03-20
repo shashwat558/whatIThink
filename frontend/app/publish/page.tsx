@@ -37,7 +37,7 @@ export default function BlogCreationPage() {
   if(admin == false) return notFound();
 
   return (
-    <div className="min-h-screen  text-white flex items-center justify-center p-4 w-full">
+    <div className="min-h-screen overflow-hidden  text-white flex items-center justify-center p-4 w-full">
       <Card className="w-import {Editor, EditorState} from 'draft-js';full backdrop-blur-sm bg-transparent w-[60pc] fixed">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-white">Create a New Blog Post</CardTitle>

@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@plugin "@tailwindcss/typography";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Parkinsans:wght@300..800&family=Teko:wght@300..700&display=swap');
 body {
   @apply font-teko;
@@ -10,7 +10,32 @@ body {
   background-size: cover; /* Optionally, to make the image cover the entire body */
 }
 
+.blue-code-block {
+  background-color: #1d344d; /* Blue background */
+  color: white;              /* White text */
+  padding: 1rem;             /* Padding */
+  border-radius: 5px;        /* Rounded corners */
+  font-family: monospace;    /* Monospace font for code */
+  
+          /* Enable horizontal scrolling */
+  
+}
 
+.prose ul, .prose ol {
+  padding-left: 20px;
+}
+
+.prose ul li, .prose ol li {
+  margin-bottom: 5px;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
