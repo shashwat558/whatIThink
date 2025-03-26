@@ -14,7 +14,7 @@ import { Icons } from '@/components/icon'
 // import { TextEditor } from '@/components/TextEditor'
 
 import Tiptap from '@/components/tiptap'
-import { blogSchema } from '@/types/types'
+
 
 
         
@@ -72,11 +72,7 @@ export default function BlogCreationPage() {
         <CardFooter>
           <Button onClick={async() => {
 
-             const validatedData = blogSchema.safeParse({title, description});
-                if(!validatedData.success){
-                  alert("Please enter title and description")
-                  return null;
-                }
+      
 
              try {
                 setIsLoading(true);
