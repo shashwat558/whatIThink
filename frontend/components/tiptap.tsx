@@ -8,10 +8,13 @@ import UnderLine from "@tiptap/extension-underline"
 import CodeBlockLowLight from "@tiptap/extension-code-block-lowlight"
 
 import Heading from "@tiptap/extension-heading"
+import Link from "@tiptap/extension-link"
 import { Toolbar } from "./ToolBar"
+import HardBreak  from "@tiptap/extension-hard-break";
 import css from 'highlight.js/lib/languages/css'
 import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
+
 import html from 'highlight.js/lib/languages/xml'
 // load all languages with "all" or common languages with "common"
 import { all, createLowlight } from 'lowlight'
@@ -39,6 +42,7 @@ export default function Tiptap({
 }){
 
     const editor = useEditor({
+        immediatelyRender: false,
         extensions: [StarterKit.configure({
 
         }), Heading.configure({
@@ -54,7 +58,22 @@ export default function Tiptap({
           HTMLAttributes: {
             class: "blue-code-block"
           }
+        }),
+        HardBreak.extend({
+            addKeyboardShortcuts(){
+                return {
+                    Enter: () => this.editor.commands.setHardBreak()
+                }
+            }
+        }),
+        Link.configure({
+            protocols: ["http", "https", "mailto"],
+            autolink: true,
+            openOnClick: false
         })
+        
+
+
     ],
         content: content,
         editorProps: {

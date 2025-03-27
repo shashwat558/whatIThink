@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body 
         className={`${libre.className} antialiased bg-[#000000] text-white `}
       >
         

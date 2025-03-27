@@ -1,7 +1,7 @@
 "use client"
 import { type Editor } from "@tiptap/react"
 import { Toggle } from "./ui/toggle"
-import { Bold, Code, Heading2, Italic, List, ListOrdered, Redo, Strikethrough, Underline, Undo } from "lucide-react"
+import { Bold, Code, Heading2, Italic, Link, List, ListOrdered, Redo, Strikethrough, Underline, Undo } from "lucide-react"
 
 type Props = {
     editor: Editor | null
@@ -12,6 +12,7 @@ export function Toolbar({editor}: Props){
     }
 
     return <div className="border border-input bg-transparent rounded-lg text-white">
+        
         <Toggle 
         size={"sm"}
         pressed={editor.isActive("heading")}
@@ -75,6 +76,31 @@ export function Toolbar({editor}: Props){
         }}
         >
             <Code className="h-5 w-5"/>
+        </Toggle>
+        <Toggle
+         size={"sm"}
+         pressed={editor.isActive("HorizontalLine")}
+         onPressedChange={() => {
+            editor.chain().focus().setHorizontalRule().run()
+         }}
+        >
+            ---
+        </Toggle>
+
+        <Toggle
+          size={"sm"}
+          pressed={editor.isActive("Link")}
+          onPressedChange={() => {
+            const url = prompt("Add url");
+            if(url){
+
+                editor.chain().focus().extendMarkRange("link").setLink({href: url}).run()
+
+            }
+            
+          }}
+        >
+         <Link className="w-5 h-5"/>
         </Toggle>
         
  
