@@ -7,7 +7,7 @@ import StarterKit from "@tiptap/starter-kit"
 import UnderLine from "@tiptap/extension-underline"
 import CodeBlockLowLight from "@tiptap/extension-code-block-lowlight"
 
-// import Heading from "@tiptap/extension-heading"
+import Heading from "@tiptap/extension-heading"
 import Link from "@tiptap/extension-link"
 import { Toolbar } from "./ToolBar"
 import HardBreak  from "@tiptap/extension-hard-break";
@@ -45,6 +45,13 @@ export default function Tiptap({
         immediatelyRender: false,
         extensions: [StarterKit.configure({
 
+        }), Heading.configure({
+            levels: [2],
+            HTMLAttributes: {
+                class: "text-xl font-bold",
+                
+            }
+            
         }),
         UnderLine,
         CodeBlockLowLight.configure({
